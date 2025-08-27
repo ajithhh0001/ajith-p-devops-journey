@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import emailjs from '@emailjs/browser';
+
 import { 
   Mail, 
   Phone, 
@@ -27,8 +27,6 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Initialize EmailJS
-  emailjs.init('9bo6MOrM_Gudh3r1o');
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -43,25 +41,28 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Create mailto link as fallback since EmailJS service has issues
-      const subject = `Message from ${formData.name}`;
-      const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
-      const mailtoLink = `mailto:ajithhh000@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+      const formElement = e.target as HTMLFormElement;
+      const formDataObj = new FormData(formElement);
       
-      // Open default email client
-      window.open(mailtoLink, '_blank');
-      
-      toast({
-        title: "Email Client Opened!",
-        description: "Your default email client should open with the message pre-filled. Just hit send!",
+      const response = await fetch('https://formsubmit.co/ajithhh000@gmail.com', {
+        method: 'POST',
+        body: formDataObj
       });
       
-      setFormData({ name: "", email: "", message: "" });
+      if (response.ok) {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for reaching out. I'll get back to you soon!",
+        });
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        throw new Error('Form submission failed');
+      }
     } catch (error) {
       console.error('Error:', error);
       toast({
-        title: "Please contact directly", 
-        description: "Email me at ajithhh000@gmail.com with your message",
+        title: "Failed to send message", 
+        description: "Please try again or contact me directly at ajithhh000@gmail.com",
         variant: "destructive",
       });
     } finally {
@@ -206,6 +207,11 @@ const ContactSection = () => {
                   </h3>
                   
                   <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Hidden fields for FormSubmit.co configuration */}
+                    <input type="hidden" name="_next" value={window.location.href} />
+                    <input type="hidden" name="_subject" value="New message from portfolio contact form" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    
                     <div>
                       <Label htmlFor="name" className="text-foreground">Name</Label>
                       <Input
