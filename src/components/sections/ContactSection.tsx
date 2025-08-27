@@ -27,6 +27,9 @@ const ContactSection = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Initialize EmailJS
+  emailjs.init('9bo6MOrM_Gudh3r1o');
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -40,18 +43,18 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Send email using EmailJS
-      await emailjs.send(
+      // Send email using EmailJS with proper template parameters
+      const result = await emailjs.send(
         'service_nnlygyb',  // Service ID
         'template_fsb6ejk', // Template ID
         {
-          from_name: formData.name,
-          from_email: formData.email,
+          user_name: formData.name,
+          user_email: formData.email,
           message: formData.message,
-          to_name: 'Ajith',
-        },
-        '9bo6MOrM_Gudh3r1o' // Public Key
+        }
       );
+      
+      console.log('EmailJS Success:', result);
       
       toast({
         title: "Message Sent!",
@@ -62,8 +65,8 @@ const ContactSection = () => {
     } catch (error) {
       console.error('EmailJS Error:', error);
       toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me directly via email.",
+        title: "Failed to send message", 
+        description: "There was an issue with the email service. Please contact me directly at ajithhh000@gmail.com",
         variant: "destructive",
       });
     } finally {
