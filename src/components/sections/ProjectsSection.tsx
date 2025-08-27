@@ -21,7 +21,7 @@ const ProjectsSection = () => {
       category: "Full-Stack Development",
       status: "Completed",
       links: {
-        github: "#",
+        github: "https://github.com/AKSHAY-PV-8/P1-GAME-PLAN",
         live: "#"
       }
     },
@@ -136,15 +136,29 @@ const ProjectsSection = () => {
 
                       {/* Action Buttons */}
                       <div className="flex flex-wrap gap-4">
-                        <Button variant="outline" size="sm" className="group/btn">
-                          <Github className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
-                          View Code
-                          <ExternalLink className="h-3 w-3 ml-2" />
-                        </Button>
-                        <Button variant="default" size="sm" className="glow-primary group/btn">
-                          <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
-                          Live Demo
-                        </Button>
+                        {project.links.github !== "#" && (
+                          <Button 
+                            variant="outline" 
+                            size="sm" 
+                            className="group/btn border-border hover:bg-surface-elevated"
+                            onClick={() => window.open(project.links.github, '_blank')}
+                          >
+                            <Github className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
+                            View Code
+                            <ExternalLink className="h-3 w-3 ml-2" />
+                          </Button>
+                        )}
+                        {project.links.live !== "#" && (
+                          <Button 
+                            variant="default" 
+                            size="sm" 
+                            className="glow-primary group/btn"
+                            onClick={() => window.open(project.links.live, '_blank')}
+                          >
+                            <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
+                            Live Demo
+                          </Button>
+                        )}
                       </div>
                     </div>
 

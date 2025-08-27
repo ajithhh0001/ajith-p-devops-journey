@@ -17,15 +17,20 @@ const HeroSection = () => {
           
           {/* Left Content */}
           <div className="flex-1 text-center lg:text-left animate-fade-up">
-            <div className="inline-block px-4 py-2 glass-card mb-6 animate-scale-in">
-              <span className="text-sm font-medium text-primary">
+            <div className="inline-block px-6 py-3 glass-card mb-8 animate-scale-in rounded-full border border-primary/20">
+              <span className="text-sm font-semibold text-primary flex items-center gap-2">
+                <div className="w-2 h-2 bg-success rounded-full animate-pulse"></div>
                 Available for DevOps Opportunities
               </span>
             </div>
             
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="block text-foreground">Ajith P</span>
-              <span className="gradient-text">DevOps Engineer</span>
+            <h1 className="text-4xl md:text-6xl lg:text-8xl font-black mb-6 leading-none tracking-tight">
+              <span className="block text-foreground font-extrabold bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text text-transparent drop-shadow-lg">
+                Ajith P
+              </span>
+              <span className="gradient-text font-bold text-3xl md:text-5xl lg:text-6xl block mt-2 tracking-wide">
+                DevOps Engineer
+              </span>
             </h1>
             
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
@@ -38,19 +43,19 @@ const HeroSection = () => {
               <Button 
                 size="lg" 
                 onClick={() => scrollToSection("projects")}
-                className="glow-primary hover:shadow-glow-primary transition-all duration-300 group"
+                className="glow-primary hover:shadow-glow-primary transition-all duration-300 group bg-gradient-primary text-white font-semibold px-8 py-4 rounded-xl"
               >
                 View My Work
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               
               <Button 
                 variant="outline" 
                 size="lg"
                 onClick={() => scrollToSection("contact")}
-                className="border-border hover:bg-surface-elevated"
+                className="border-border hover:bg-surface-elevated font-semibold px-8 py-4 rounded-xl backdrop-blur-sm"
               >
-                <Download className="mr-2 h-4 w-4" />
+                <Download className="mr-2 h-5 w-5" />
                 Download CV
               </Button>
             </div>
