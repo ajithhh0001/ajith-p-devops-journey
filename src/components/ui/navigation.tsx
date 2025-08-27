@@ -25,7 +25,6 @@ const Navigation = () => {
   };
 
   const navItems = [
-    { label: "Home", href: "hero" },
     { label: "About", href: "about" },
     { label: "Skills", href: "skills" },
     { label: "Projects", href: "projects" },
@@ -60,11 +59,11 @@ const Navigation = () => {
               </button>
             ))}
             <Button 
-              variant="outline" 
+              variant="default" 
               onClick={() => scrollToSection("contact")}
-              className="ml-4"
+              className="ml-4 glow-primary"
             >
-              Let's Connect
+              Contact Me
             </Button>
           </div>
 
@@ -93,11 +92,11 @@ const Navigation = () => {
                 </button>
               ))}
               <Button 
-                variant="outline" 
+                variant="default" 
                 onClick={() => scrollToSection("contact")}
-                className="mt-4 w-fit"
+                className="mt-4 w-fit glow-primary"
               >
-                Let's Connect
+                Contact Me
               </Button>
             </div>
           </div>
