@@ -43,30 +43,25 @@ const ContactSection = () => {
     setIsSubmitting(true);
     
     try {
-      // Send email using EmailJS with proper template parameters
-      const result = await emailjs.send(
-        'service_nnlygyb',  // Service ID
-        'template_fsb6ejk', // Template ID
-        {
-          user_name: formData.name,
-          user_email: formData.email,
-          message: formData.message,
-        }
-      );
+      // Create mailto link as fallback since EmailJS service has issues
+      const subject = `Message from ${formData.name}`;
+      const body = `Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`;
+      const mailtoLink = `mailto:ajithhh000@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
       
-      console.log('EmailJS Success:', result);
+      // Open default email client
+      window.open(mailtoLink, '_blank');
       
       toast({
-        title: "Message Sent!",
-        description: "Thank you for reaching out. I'll get back to you soon!",
+        title: "Email Client Opened!",
+        description: "Your default email client should open with the message pre-filled. Just hit send!",
       });
       
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error('Error:', error);
       toast({
-        title: "Failed to send message", 
-        description: "There was an issue with the email service. Please contact me directly at ajithhh000@gmail.com",
+        title: "Please contact directly", 
+        description: "Email me at ajithhh000@gmail.com with your message",
         variant: "destructive",
       });
     } finally {
