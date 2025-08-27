@@ -36,38 +36,10 @@ const ContactSection = () => {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    // For traditional form submission, we don't prevent default
+    // FormSubmit.co requires normal form submission to avoid CORS issues
     setIsSubmitting(true);
-    
-    try {
-      const formElement = e.target as HTMLFormElement;
-      const formDataObj = new FormData(formElement);
-      
-      const response = await fetch('https://formsubmit.co/ajithhh000@gmail.com', {
-        method: 'POST',
-        body: formDataObj
-      });
-      
-      if (response.ok) {
-        toast({
-          title: "Message Sent!",
-          description: "Thank you for reaching out. I'll get back to you soon!",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        throw new Error('Form submission failed');
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      toast({
-        title: "Failed to send message", 
-        description: "Please try again or contact me directly at ajithhh000@gmail.com",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
-    }
   };
 
   const contactInfo = [
@@ -206,9 +178,14 @@ const ContactSection = () => {
                     Send me a message
                   </h3>
                   
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form 
+                    onSubmit={handleSubmit} 
+                    action="https://formsubmit.co/ajithhh000@gmail.com" 
+                    method="POST"
+                    className="space-y-6"
+                  >
                     {/* Hidden fields for FormSubmit.co configuration */}
-                    <input type="hidden" name="_next" value={window.location.href} />
+                    <input type="hidden" name="_next" value={`${window.location.origin}/thank-you`} />
                     <input type="hidden" name="_subject" value="New message from portfolio contact form" />
                     <input type="hidden" name="_captcha" value="false" />
                     
