@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajith Kumar - Portfolio</title>
+  <script>
+    // GitHub Pages SPA redirect script
+    // Store the current URL path and redirect to index.html with the path as a hash
+    const path = window.location.pathname.slice(1);
+    const query = window.location.search;
+    if (path) {
+      window.location.replace(
+        window.location.origin + '/#/' + path + query
+      );
+    } else {
+      window.location.replace(
+        window.location.origin + '/' + query
+      );
+    }
+  </script>
+</head>
+<body>
+  <p>Redirecting...</p>
+</body>
+</html>

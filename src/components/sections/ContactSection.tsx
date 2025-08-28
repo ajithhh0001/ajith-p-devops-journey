@@ -185,7 +185,7 @@ const ContactSection = () => {
                     className="space-y-6"
                   >
                     {/* Hidden fields for FormSubmit.co configuration */}
-                    <input type="hidden" name="_next" value={`${window.location.origin}/thank-you`} />
+                    <input type="hidden" name="_next" value={`${window.location.origin}${import.meta.env.BASE_URL}#/thank-you`} />
                     <input type="hidden" name="_subject" value="New message from portfolio contact form" />
                     <input type="hidden" name="_captcha" value="false" />
                     
